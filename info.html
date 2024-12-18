@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>틀린 어휘 찾기-info</title>
+
+	<style>
+		@font-face {
+		  font-family: 'HMFBRG'; /* 폰트 이름 */
+		  src: url('HMFBRG.woff') format('woff'); /* WOFF 파일 경로 */
+		}
+		@font-face {
+		  font-family: 'HMFMRG'; /* 폰트 이름 */
+		  src: url('HMFMRG.woff') format('woff'); /* WOFF 파일 경로 */
+		}
+		@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+		}
+
+		* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* 전체 페이지 레이아웃을 Flexbox로 설정 */
+        body {
+            font-family: HMFBRG;
+            text-align: left;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;  /* 위쪽으로 배치 */
+            align-items: center;  /* 수평 중앙 정렬 */
+            height: 100vh;  /* 화면 높이 */
+            background-image: url('paper_texture_11.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            cursor: url('oth845.cur'), auto;
+        }
+
+        .rounded-rectangle {
+	      width: 160px; /* 가로 길이 */
+	      height: 50px; /* 세로 길이 */
+	      background-color: white; /* 배경색 */
+	      border: 2px solid black;
+	      border-radius: 50px; /* 둥근 모서리 (반지름 크기) */
+	      z-index: 1;
+	      font-size: 1.7rem;
+	      text-align: center;
+	      line-height: 45px;
+	      font-family: 'Pretendard-Regular';
+	      margin-top: 50px;
+	      position: absolute;
+	      left: 500px;
+	    }
+	    #Stitle{
+			font-size: 2.2rem;
+	    	text-align: center;
+	    	font-family: 'Pretendard-Regular';
+	    	z-index: 1;
+	    	position: absolute;
+	    	top:150px;
+	    }
+	    #Ltitle{
+			font-size: 5rem;
+	    	text-align: center;
+	    	font-family: Pretendard-Regular;
+	    	z-index: 1;
+	    	margin-bottom: 0;
+	    	margin-top: 0;
+	    	position: absolute;
+	    	top:210px;
+	    	letter-spacing: -2px;
+	    	font-weight: 700;
+	    }
+	    .rectangle-container {
+            display: flex; /* 두 네모를 수평으로 배치 */
+            position: relative;
+            top:320px;
+        }
+        .rectangle1 {
+            width: 80px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            margin-right: -2px;
+            font-size: 1.5rem;
+	      text-align: center;
+	      line-height: 45px;
+        }
+        .rectangle2 {
+            width: 200px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            font-size: 1.5rem;
+	      text-align: center;
+	      line-height: 45px;
+	      display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+        }
+        .info{
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5); /* 배경색 추가 */
+            border: 2px solid black; /* 테두리 추가 */
+            margin-top: 50px; /* 상단 간격 추가 */
+            position: relative; /* 다른 요소들과 위치 조정을 가능하게 함 */
+            z-index: 1;
+            top:310px;
+            padding: 30px;
+            font-size: 1.2rem;
+            line-height: 2;
+            opacity: 0; /* 초기 상태에서 보이지 않게 설정 */
+    		transition: opacity 1.5s ease-in-out;
+        }
+        .goback {
+            display: flex; /* 두 네모를 수평으로 배치 */
+            position: relative;
+            top:220px;
+            opacity: 0; /* 초기 상태에서 보이지 않게 설정 */
+    		transition: opacity 1.5s ease-in-out;
+             }
+        #go{
+        	width: 200px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: dimgray; /* 배경색 */
+            font-size: 1.2rem;
+	      	text-align: center;
+	     	line-height: 45px;
+	      	display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            color: white;
+            margin-right: 20px;
+        }
+        #back{
+        	width: 150px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: dimgray; /* 배경색 */
+            font-size: 1.2rem;
+	      	text-align: center;
+	     	line-height: 45px;
+	      	display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            color: white;
+        }
+        #go:hover{
+            background-color: gray !important;
+            cursor: pointer;}
+        #back:hover{
+            background-color: gray !important;
+            cursor: pointer;}
+
+	</style>
+</head>
+<body>
+	<div class="rounded-rectangle">맞춤법 영역</div>
+	<div id="Stitle">2024년 틀리기쉬운맞춤법알아가기평가 문제지</div>
+	<div id="Ltitle">틀린 어휘 찾기</div>
+	<div class="rectangle-container">
+        <div class="rectangle1">성명</div>
+        <div class="rectangle2"><span id="name"></span></div></div>
+    <div class="info">○ 〈틀린 어휘 찾기〉는 〈틀린 그림 찾기〉를 모티프로 제작한 맞춤법 학습 <br>&emsp;&emsp;게임입니다. <br>
+	○ 총 다섯 개의 노래 가사에서 틀린 맞춤법을 모두 찾아 클릭하는 간단한 <br>&emsp;&emsp;방식입니다. <br>
+	○ 틀린 맞춤법을 모두 찾으면 틀린 이유(해설)를 확인할 수 있고, 다음 단계로 <br>&emsp;&emsp;넘어갈 수 있습니다. <br>
+	○ 모든 가사는 음악 사이트 멜론 제공 가사입니다.
+	</div>
+	<div class="goback">
+		<div id="go">▶ 문제 풀러 가기</div>
+		<div id="back">▶ 처음으로</div></div>
+
+        <script type="text/javascript">
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        if (name) {
+            document.getElementById('name').textContent = name;
+        } else {
+            document.getElementById('name').textContent = "이름을 찾을 수 없습니다.";
+        }
+
+       setTimeout(() => {
+       document.querySelector('.info').style.opacity = 1;
+    	}, 500);
+       setTimeout(() => {
+       document.querySelector('.goback').style.opacity = 1;
+    	}, 3000);
+
+       // Go 버튼 클릭 시 다음 페이지로 이동
+        document.getElementById('go').addEventListener('click', () => {
+            window.location.href = '문제 1.html';
+            window.location.href = `문제 1.html?name=${name}`;
+        });
+
+        // Back 버튼 클릭 시 첫 페이지로 돌아가기
+        document.getElementById('back').addEventListener('click', () => {
+            window.location.href = 'index.html'; 
+        });
+        </script>
+</body>
+</html>

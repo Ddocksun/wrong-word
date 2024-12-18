@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>틀린 어휘 찾기</title>
+
+	<style>
+		@font-face {
+		  font-family: 'HMFBRG'; /* 폰트 이름 */
+		  src: url('HMFBRG.woff') format('woff'); /* WOFF 파일 경로 */
+		}
+		@font-face {
+		  font-family: 'HMFMRG'; /* 폰트 이름 */
+		  src: url('HMFMRG.woff') format('woff'); /* WOFF 파일 경로 */
+		}
+		@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+		}
+
+		* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* 전체 페이지 레이아웃을 Flexbox로 설정 */
+        body {
+            font-family: HMFBRG;
+            text-align: left;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;  /* 위쪽으로 배치 */
+            align-items: center;  /* 수평 중앙 정렬 */
+            height: 100vh;  /* 화면 높이 */
+            background-image: url('paper_texture_11.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            cursor: url('oth845.cur'), auto;
+        }
+
+        .rounded-rectangle {
+	      width: 160px; /* 가로 길이 */
+	      height: 50px; /* 세로 길이 */
+	      background-color: white; /* 배경색 */
+	      border: 2px solid black;
+	      border-radius: 50px; /* 둥근 모서리 (반지름 크기) */
+	      z-index: 1;
+	      font-size: 1.7rem;
+	      text-align: center;
+	      line-height: 45px;
+	      font-family: 'Pretendard-Regular';
+	      margin-top: 180px;
+	      position: absolute;
+	      left: 500px;
+	    }
+	    #Stitle{
+			font-size: 2.2rem;
+	    	text-align: center;
+	    	font-family: 'Pretendard-Regular';
+	    	z-index: 1;
+	    	position: absolute;
+	    	top:300px;
+	    }
+	    #Ltitle{
+			font-size: 5rem;
+	    	text-align: center;
+	    	font-family: Pretendard-Regular;
+	    	z-index: 1;
+	    	margin-bottom: 0;
+	    	margin-top: 0;
+	    	position: absolute;
+	    	top:370px;
+	    	letter-spacing: -2px;
+	    	font-weight: 700;
+	    }
+	    .rectangle-container {
+            display: flex; /* 두 네모를 수평으로 배치 */
+            position: relative;
+            top:500px;
+        }
+        .rectangle1 {
+            width: 80px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            margin-right: -2px;
+            font-size: 1.5rem;
+	      text-align: center;
+	      line-height: 45px;
+        }
+        .rectangle2 {
+            width: 200px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        .input-name{
+            font-family: HMFBRG;
+        font-size: 1.5rem;
+            text-align: center;
+            line-height: 45px;
+            color: darkgreen;
+            width: 100%; /* 입력 필드의 가로 길이가 rect2와 같게 만듬 */
+            height: 100%; /* 입력 필드의 세로 길이가 rect2와 같게 만듬 */
+            border: none; /* 기본 테두리 제거 */
+            outline: none; /* 포커스 시 테두리 강조 제거 */
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .text-container {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .clickable {
+            color: black;
+            cursor: pointer;
+            position: relative; /* 단어 위에 가위표를 정확히 위치시킬 수 있도록 함 */
+            display: inline-block;
+        }
+
+        /* 가위표 스타일 */
+        .checkmark {
+            position: absolute;
+            top: -5px;   /* 단어 위에 가위표를 겹쳐서 표시할 수 있게 위치 조정 */
+            left: 100%;  /* 단어의 오른쪽 끝에 가위표가 위치하도록 설정 */
+            font-size: 24px;
+            color: green;
+            transform: translateX(-30px);  /* 위치를 약간 오른쪽으로 조정 */
+        }
+	</style>
+</head>
+<body>
+	<div class="rounded-rectangle">맞춤법 영역</div>
+	<div id="Stitle">2024년 틀리기쉬운맞춤법알아가기평가 문제지</div>
+	<div id="Ltitle">틀린 어휘 찾기</div>
+	<div class="rectangle-container">
+        <div class="rectangle1">성명</div>
+        <div class="rectangle2" onclick="makeEditable()"></div>
+    </div>
+
+        <script type="text/javascript">
+        	function makeEditable() {
+            var rect2 = document.querySelector('.rectangle2');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'input-name';
+            input.placeholder = '';
+            input.onkeydown = function(event) {
+                if (event.key === 'Enter') {
+                    submitName(input.value);
+                }
+            };
+
+            input.onblur = function() {
+                if (input.value) {
+                    rect2.innerHTML = '<span class="final-text">' + input.value + '</span>'; // 이름을 입력하면 텍스트로 변경
+                    submitName(input.value); // 입력 후 이름을 URL로 전달
+                } else {
+                    rect2.innerHTML = ''; // 빈 값일 경우 다시 기본 텍스트로 변경
+                }
+            };
+            rect2.innerHTML = ''; // 기존 텍스트 지우기
+            rect2.appendChild(input); // 입력 필드 추가
+            input.focus(); // 자동으로 입력 필드에 포커스
+        }
+        
+        function submitName(name) {
+            if (name) {
+                // 이름을 입력하면 다음 페이지로 이동하면서 이름을 URL에 전달
+                window.location.href = "info.html?name=" + encodeURIComponent(name);  // URL에 이름 전달
+            } else {
+                alert("이름을 입력해주세요!");
+            }
+        }
+        </script>
+</body>
+</html>

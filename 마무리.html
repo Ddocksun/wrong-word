@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>틀린 어휘 찾기</title>
+
+    <style>
+        @font-face {
+          font-family: 'HMFBRG'; /* 폰트 이름 */
+          src: url('HMFBRG.woff') format('woff'); /* WOFF 파일 경로 */
+        }
+        @font-face {
+          font-family: 'HMFMRG'; /* 폰트 이름 */
+          src: url('HMFMRG.woff') format('woff'); /* WOFF 파일 경로 */
+        }
+        @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* 전체 페이지 레이아웃을 Flexbox로 설정 */
+        body {
+            font-family: HMFBRG;
+            text-align: left;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;  /* 위쪽으로 배치 */
+            align-items: center;  /* 수평 중앙 정렬 */
+            height: 100vh;  /* 화면 높이 */
+            background-image: url('paper_texture_11.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            cursor: url('oth845.cur'), auto;
+        }
+
+        .rounded-rectangle {
+          width: 160px; /* 가로 길이 */
+          height: 50px; /* 세로 길이 */
+          background-color: white; /* 배경색 */
+          border: 2px solid black;
+          border-radius: 50px; /* 둥근 모서리 (반지름 크기) */
+          z-index: 1;
+          font-size: 1.7rem;
+          text-align: center;
+          line-height: 45px;
+          font-family: 'Pretendard-Regular';
+          margin-top: 180px;
+          position: absolute;
+          left: 500px;
+        }
+        #Stitle{
+            font-size: 2.2rem;
+            text-align: center;
+            font-family: 'Pretendard-Regular';
+            z-index: 1;
+            position: absolute;
+            top:300px;
+        }
+        #Ltitle{
+            font-size: 5rem;
+            text-align: center;
+            font-family: Pretendard-Regular;
+            z-index: 1;
+            margin-bottom: 0;
+            margin-top: 0;
+            position: absolute;
+            top:370px;
+            letter-spacing: -2px;
+            font-weight: 700;
+        }
+        .rectangle-container {
+            display: flex; /* 두 네모를 수평으로 배치 */
+            position: absolute;
+            top:500px; left: 790px;
+            transition: left 1s ease-in-out;
+        }
+        .rectangle-container2 {
+            display: flex; /* 두 네모를 수평으로 배치 */
+            position: absolute;
+            top:500px; left: 940px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .rectangle1 {
+            width: 80px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            margin-right: -2px;
+            font-size: 1.5rem;
+          text-align: center;
+          line-height: 45px;
+        }
+        .rectangle2 {
+            width: 200px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        .rectangle3 {
+            width: 200px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: red;
+        }
+        .input-name{
+            font-family: HMFBRG;
+        font-size: 1.5rem;
+            text-align: center;
+            line-height: 45px;
+            color: darkgreen;
+            width: 100%; /* 입력 필드의 가로 길이가 rect2와 같게 만듬 */
+            height: 100%; /* 입력 필드의 세로 길이가 rect2와 같게 만듬 */
+            border: none; /* 기본 테두리 제거 */
+            outline: none; /* 포커스 시 테두리 강조 제거 */
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .text-container {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        #last{
+            font-size: 1.5rem;
+            text-align: center;
+            z-index: 1;
+            position: absolute;
+            top:600px;
+            opacity: 0; /* 처음에 숨겨두기 */
+        }
+
+        #back{
+            width: 130px; /* 가로 길이 */
+            height: 40px; /* 세로 길이 */
+            background-color: dimgray; /* 배경색 */
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 45px;
+            display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            color: white;
+            position: absolute;
+            top:680px;
+            opacity: 0; /* 처음에는 보이지 않음 */
+            transition: opacity 1s ease-in-out; /* 서서히 나타나도록 설정 */
+        }
+    </style>
+</head>
+<body>
+    <div class="rounded-rectangle">맞춤법 영역</div>
+    <div id="Stitle">2024년 틀리기쉬운맞춤법알아가기평가 문제지</div>
+    <div id="Ltitle">틀린 어휘 찾기</div>
+    <div class="rectangle-container">
+        <div class="rectangle1">성명</div>
+        <div class="rectangle2"></div></div>
+        <div class="rectangle-container2">
+        <div class="rectangle1">점수</div>
+        <div class="rectangle3">100</div>
+    </div>
+    <div id="last">축하합니다! 이제 당신은 맞춤법 마스터!</div>
+    <div id="back">▶ 복습하기</div>
+
+    <script type="text/javascript">
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+
+        // 페이지가 열리자마자 rect2에 name 값을 넣기
+        window.onload = function() {
+            const rect2 = document.querySelector('.rectangle2');
+            if (name) {
+                rect2.textContent = name;  // name 값을 rect2에 넣습니다.
+            } else {
+                rect2.textContent = "이름을 찾을 수 없습니다.";  // name 값이 없으면 기본 텍스트 추가
+            }
+        };
+
+        setTimeout(function() {
+            // rectangle-container가 left:640px로 이동
+            document.querySelector('.rectangle-container').style.left = '640px';
+
+            // 이동이 끝난 후 0.5초 뒤에 rectangle-container2가 나타나도록 설정
+            setTimeout(function() {
+                document.querySelector('.rectangle-container2').style.opacity = '1';
+
+                // rectangle-container2가 완전히 나타난 후 타이핑 효과 시작
+                setTimeout(function() {
+                    const lastText = document.getElementById('last');
+                    let text = lastText.textContent; // 전체 텍스트를 가져옴
+                    lastText.textContent = ''; // 초기 텍스트는 비워둠
+                    lastText.style.opacity = 1; // 타이핑 효과 시작 전에 서서히 나타나도록 설정
+
+                    let i = 0;
+
+                    // 타이핑 효과
+                    function typeWriter() {
+                        if (i < text.length) {
+                            lastText.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 100); // 글자 하나씩 추가 (100ms 간격)
+                        } else {
+                            // 타이핑 효과가 끝나면 'back' 버튼을 서서히 나타나게 함
+                            document.getElementById('back').style.opacity = 1;
+                        }
+                    }
+
+                    typeWriter(); // 타이핑 효과 시작
+                }, 1500); // 1.5초 뒤에 타이핑 효과 시작
+            }, 800);  // 0.5초 뒤에 rectangle-container2가 나타남
+        }, 500);  // 5초 뒤에 실행
+
+        document.getElementById('back').addEventListener('click', () => {
+            window.location.href = 'index.html'; 
+        });
+    </script>
+</body>
+</html>

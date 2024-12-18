@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>인피니트 - 내꺼하자</title>
+
+    <style>
+        @font-face {
+          font-family: 'HMFBRG'; /* 폰트 이름 */
+          src: url('HMFBRG.woff') format('woff'); /* WOFF 파일 경로 */
+        }
+        @font-face {
+          font-family: 'HMFMRG'; /* 폰트 이름 */
+          src: url('HMFMRG.woff') format('woff'); /* WOFF 파일 경로 */
+        }
+        @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        html{user-select:none}
+
+        /* 전체 페이지 레이아웃을 Flexbox로 설정 */
+        body {
+            font-family: HMFBRG;
+            text-align: left;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;  /* 위쪽으로 배치 */
+            align-items: center;  /* 수평 중앙 정렬 */
+            height: 100vh;  /* 화면 높이 */
+            background-image: url('paper_texture_11.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            cursor: url('oth845.cur'), auto;
+        }
+
+        .rounded-rectangle {
+          width: 100px; /* 가로 길이 */
+          height: 50px; /* 세로 길이 */
+          background-color: white; /* 배경색 */
+          border: 2px solid black;
+          border-radius: 50px; /* 둥근 모서리 (반지름 크기) */
+          z-index: 1;
+          font-size: 1.7rem;
+          text-align: center;
+          line-height: 45px;
+          font-family: 'Pretendard-Regular';
+          margin-top: 100px;
+          position: absolute;
+          left: 250px;
+        }
+        #Stitle{
+            font-size: 1.5rem;
+            text-align: center;
+            font-family: 'Pretendard-Regular';
+            z-index: 1;
+            position: absolute;
+            top:35px;
+        }
+        #Ltitle{
+            font-size: 5rem;
+            text-align: center;
+            font-family: Pretendard-Regular;
+            z-index: 1;
+            margin-bottom: 0;
+            margin-top: 0;
+            position: absolute;
+            top:100px;
+            letter-spacing: -2px;
+            font-weight: 700;
+        }
+        #singer{
+            font-size: 1rem;
+            text-align: center;
+            font-family: Pretendard-Regular;
+            z-index: 1;
+            margin-bottom: 0;
+            margin-top: 0;
+            position: absolute;
+            top:205px;
+        }
+        .rectangle-container {
+            display: flex; /* 두 네모를 수평으로 배치 */
+            position: relative;
+            margin-top: 110px;
+            left: 550px;
+        }
+        .rectangle1 {
+            width: 80px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            margin-right: -2px;
+            font-size: 1.5rem;
+          text-align: center;
+          line-height: 45px;
+        }
+        .rectangle2 {
+            width: 150px; /* 가로 길이 */
+            height: 50px; /* 세로 길이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid black; /* 검은색 테두리 */
+            font-size: 1.5rem;
+          text-align: center;
+          line-height: 45px;
+          display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+        }
+        .Q1 {
+            width: 52%; /* 부모의 80% 크기로 설정 */
+            margin-top: 80px;
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            padding: 15px;
+            padding-left: 150px;
+            padding-top: 50px;
+            font-size: 1.5rem;
+            line-height: 1.7;
+        }
+        .Q2 {
+            width: 52%; /* 부모의 80% 크기로 설정 */
+            margin-top: 80px;
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            padding: 15px;
+            padding-left: 150px;
+            padding-top: 50px;
+            font-size: 1.5rem;
+            line-height: 1.7;
+            display: none;
+        }
+        .Q3 {
+            width: 52%; /* 부모의 80% 크기로 설정 */
+            margin-top: 80px;
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            padding: 15px;
+            padding-left: 150px;
+            padding-top: 50px;
+            font-size: 1.5rem;
+            line-height: 1.7;
+            display: none;
+        }
+        .Q4 {
+            width: 52%; /* 부모의 80% 크기로 설정 */
+            margin-top: 80px;
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            padding: 15px;
+            padding-left: 150px;
+            padding-top: 50px;
+            font-size: 1.5rem;
+            line-height: 1.7;
+            display: none;
+        }
+        .Q5 {
+            width: 52%; /* 부모의 80% 크기로 설정 */
+            margin-top: 80px;
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            padding: 15px;
+            padding-left: 150px;
+            padding-top: 50px;
+            font-size: 1.5rem;
+            line-height: 1.7;
+            display: none;
+        }
+        .A {
+            width: 52%; /* 부모의 80% 크기로 설정 */
+            margin-top: 80px;
+            width: 800px;
+            height: 420px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            padding: 50px;
+            padding-top: 30px;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            display: none;
+            overflow-y: auto;
+        }
+        .clickable {
+            color: black;
+            cursor: url('oth845.cur'), auto;
+            position: relative; /* 단어 위에 가위표를 정확히 위치시킬 수 있도록 함 */
+            display: inline-block;
+            top:12px;
+            line-height: 1.2;
+            top: 5px;
+        }
+
+        /* 가위표 스타일 */
+        .checkmark {
+            position: absolute;
+            top: -12px;   /* 단어 위에 가위표를 겹쳐서 표시할 수 있게 위치 조정 */
+            left: 70%;  /* 단어의 오른쪽 끝에 가위표가 위치하도록 설정 */
+            font-size: 40px;
+            color: green;
+            transform: translateX(-30px);  /* 위치를 약간 오른쪽으로 조정 */
+        }
+        #score {
+            width: 120px; /* 가로 길이 */
+            height: 35px; /* 세로 길이 */
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 45px;
+            display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            color: black;
+            background-color: rgba(255, 255, 255, 0.5); /* 배경색 추가 */
+            border: 2px solid black; /* 테두리 추가 */
+            margin-top: 20px;
+        }
+        #ans {
+            width: 150px; /* 가로 길이 */
+            height: 35px; /* 세로 길이 */
+            background-color: dimgray; /* 배경색 */
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 35px; /* 텍스트 수직 중앙 정렬 */
+            display: flex; /* 텍스트를 수평 중앙에 배치 */
+            justify-content: center;
+            align-items: center;
+            z-index: 4;
+            color: white;
+            margin-top: 20px;
+        }
+
+        #ans:hover {
+            background-color: gray !important;
+        }
+        .ansback {
+            display: flex; /* 플렉스 박스를 사용하여 중앙 정렬 */
+            justify-content: center; /* 수평 중앙 정렬 */
+            align-items: center; /* 수직 중앙 정렬 */
+            flex-direction: column; /* 자식 요소를 세로로 배치 */
+            display: none;
+        }
+        #video-container {
+            width: 150px;
+            height: 80px;
+            margin-top: 30px;
+        }
+        #video-wrapper {
+            display: block; /* 유튜브 비디오가 처음부터 보이도록 */
+            width: 150px;
+            height: 80px;
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="rounded-rectangle">제5번</div>
+    <div id="Stitle">2024년 틀리기쉬운맞춤법알아가기평가 문제지</div>
+    <div id="Ltitle">내꺼하자</div>
+    <div id="singer">인피니트&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2011.07.21 발매</div>
+    <div class="rectangle-container">
+        <div class="rectangle1">성명</div>
+        <div class="rectangle2"><span id="name"></span></div></div>
+    <div class="Q1">
+
+            1. 다음 중 틀린 어휘를 클릭해 주세요.
+            <br><br>
+            <p>
+            지켜봐 왔잖아<span class="clickable" data-text="니">&nbsp;니&nbsp;</span>사랑을 긴 이별을<br>
+늘 상처받을 바엔 난 게 나아<br>
+똑바로 봐 <span class="clickable" data-text="우는게">우는게</span> 싫어서 그래<br>
+<span class="clickable" data-text="아픈게">아픈게</span> 힘들어 그래
+
+</p>
+    </div>
+    
+    <div class="Q2">
+            2. 다음 중 틀린 어휘를 클릭해 주세요.
+            <br><br>
+            <p>
+            <span class="clickable" data-text="내꺼">내꺼</span> 하자 내가 널 사랑해 어<br>
+내가 널 걱정해 어<br>
+내가 널 끝까지 책임질게
+
+</p>
+    </div>
+    <div class="Q3">
+
+            3. 복습! 다음 중 틀린 어휘를 클릭해 주세요.
+            <br><br>
+            <p>
+            젖은 기억 박힌 눈길 끝<br>
+내 품에서 죽길 <span class="clickable" data-text="바래">바래</span><br>
+잘린 마음이 흘린 눈물 삼키는 건<br>
+나지막이 들린 너라도 감추는 나
+</p>
+    </div>
+    <div class="Q4">
+
+            4. 다음 중 틀린 어휘를 클릭해 주세요.
+            <br><br>
+            <p>
+            같이 가자 <span class="clickable" data-text="힘든길">힘든길</span> <span class="clickable" data-text="걷지마">걷지마</span> 어<br>
+쉽지 않았잖아 어<br>
+다시는 그런 널 보기 싫어
+</p>
+    </div>
+    <div class="Q5">
+
+            5. 다음 중 틀린 어휘를 클릭해 주세요.
+            <br><br>
+            <p>
+            나는 <span class="clickable" data-text="달 처럼">달 처럼</span><span class="clickable" data-text="니2"> &nbsp;니&nbsp; </span>주윌 돌고 돌아<br>
+불이 <span class="clickable" data-text="꺼져 버린">꺼져 버린</span><br><span class="clickable" data-text="니3">
+니&nbsp; </span>사랑은 놓고 날 봐<br>
+깊이 <span class="clickable" data-text="패여 버린">패여 버린</span> 상처 덮어줄게<br>
+<span class="clickable" data-text="웃게할게">웃게할게</span> <span class="clickable" data-text="내걸로">내걸로</span> 만들게
+
+</p>
+    </div>
+    <div class="A">
+        1. 니? 네?<br><br>
+틀린 표현이라고 하기엔 애매하지만, '네'가 표준어입니다. 현실적으로 구어체에 익숙해져 '니'를 사용하기도 하나 이는 현재 표준어가 아닙니다. 우리말샘에 대명사 '너'(네)의 방언으로 '니'가 올라 있기 때문입니다.<br><br>
+
+2. 게는 것이다<br><br>
+여기서 '게'는 '것이'의 준말이기 때문에 띄어 써야 합니다.
+<br>○ 우는 게 / 아픈 게<br><br>
+
+3. 내 것 하자<br><br>
+발음이 나는 대로 언어의 사용이 굳어진 대표적인 예시입니다. '꺼'는 '것'의 오용어이고, 혼용이 허용되지 않습니다. 또한 수식어와 피수식어 관계이므로 띄어 써야 합니다.<br><br>
+
+4. 바래다? 바라다?<br><br>
+1번 문제의 1번 해설과 동일합니다. 이제 절대 틀리지 않겠죠?<br><br>
+
+5. 힘든, 길<br><br>
+합성어로 등재되지 않은 단어이므로 띄어 써야 합니다.<br><br>
+
+6. 보조 동사 '말다'<br><br>
+'마'는 보조 동사 '말다'의 활용형이므로 앞말과 띄어 써야 합니다.<br><br>
+
+7. 조사의 사용<br><br>
+'처럼'은 조사이므로 앞말과 붙여 써야 합니다.<br><br>
+
+8. 꺼져-버리다<br><br>
+'버리다'는 앞어절의어미가 '-아/-어'일 때 그 동작이 다 끝남을 나타냅니다. 그러나 '꺼져 버리다'는 상태를 나타내므로 '꺼져 버리다'는 표현보다 '꺼지다'가 바릅니다. 해당 사례에서는 멜로디에 맞추느라 해당 활용을 사용하였겠지만, '꺼진'이 올바른 표현입니다.<br><br>
+
+9. 패다, 팬<br><br>
+해당 사례에서 동사 '패다'의 활용법으로는 '팬'이 올바른 표현입니다.<br><br>
+
+10. 웃게+할게<br><br>
+조사나 어미 다음에 오는 말은 띄어 써야 합니다.<br><br>
+
+11. 의존명사 '것'<br><br>
+'걸로'는 의존명사와 조사를 합친 '것으로'의 준말이기 때문에 앞말과 띄어 써야 합니다.
+    </div>
+    <div id="score">0 / 3</div>
+    <div class="ansback">
+        <div id="ans">▶ 해설 보기</div></div>
+    <div id="video-wrapper">
+            <div id="video-container">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/tqC8AmuZuLI?si=sn8YKYJuYBTmGkpR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        if (name) {
+            document.getElementById('name').textContent = name;
+        } else {
+            document.getElementById('name').textContent = "이름을 찾을 수 없습니다.";
+        }
+        window.onload = function() {
+            var player = document.getElementById('youtube-player');
+        }
+
+        // 문제마다 클릭할 수 있는 span의 개수를 가져와서 maxScore로 설정하는 함수
+function setMaxScoreForProblem(problemClass) {
+    const spans = document.querySelectorAll(`${problemClass} .clickable`);
+    return spans.length; // 클릭 가능한 span 개수로 maxScore 설정
+}
+
+// 문제 전환 시 초기화 및 점수 갱신
+function moveToNextQuestion(currentQuestionClass, nextQuestionClass, isFinal = false) {
+    const checkmarks = document.querySelectorAll(`${currentQuestionClass} .checkmark`);
+    checkmarks.forEach(checkmark => checkmark.remove()); // 이전 문제에서의 체크 마크 제거
+
+    const maxScore = setMaxScoreForProblem(nextQuestionClass); // 다음 문제의 maxScore 설정
+    let currentScore = 0; // 점수 초기화
+
+    // 점수와 maxScore 업데이트
+    document.getElementById('score').textContent = `${currentScore} / ${maxScore}`;
+
+    // 문제 표시 전환 (최종 문제는 변경하지 않음)
+    document.querySelector(currentQuestionClass).style.display = 'none'; // 현재 문제 숨기기
+    if (!isFinal) {
+        document.querySelector(nextQuestionClass).style.display = 'block'; // 마지막 문제가 아닐 경우만 다음 문제 보여줌
+    } else {
+        document.querySelector(nextQuestionClass).style.display = 'block'; // Q5에서 ansback이 나타나게 설정
+        document.querySelector('.Q5').style.display = 'block';  // Q5는 계속 표시되도록 설정
+    }
+
+    return currentScore; // 새로운 문제에서의 초기 점수 반환
+}
+
+// 각 문제에서 span 클릭 시 체크 마크 추가하고 점수 업데이트
+function handleSpanClick(problemClass, nextQuestionClass, isFinal = false) {
+    document.querySelectorAll(`${problemClass} .clickable`).forEach(item => {
+        item.addEventListener('click', function() {
+            if (!this.querySelector('.checkmark')) {
+                const checkmark = document.createElement('span');
+                checkmark.classList.add('checkmark');
+                checkmark.textContent = '✔';
+                this.appendChild(checkmark);
+            }
+
+            const checkmarks = document.querySelectorAll(`${problemClass} .checkmark`);
+            const maxScore = setMaxScoreForProblem(problemClass);
+
+            document.getElementById('score').textContent = `${checkmarks.length} / ${maxScore}`;
+
+            // 모든 span이 클릭되었을 경우 다음 문제로 넘어가기
+            if (checkmarks.length === maxScore) {
+                setTimeout(() => {
+                    currentScore = moveToNextQuestion(problemClass, nextQuestionClass, isFinal); // 점수 초기화하고 다음 문제로
+                }, 500); // 0.5초 후에 실행
+            }
+        });
+    });
+}
+
+// Q1부터 Q5까지 처리
+let currentScoreQ1 = 0;
+handleSpanClick('.Q1', '.Q2');  // Q1 클릭 시 Q2로 이동
+let currentScoreQ2 = 0;
+handleSpanClick('.Q2', '.Q3');  // Q2 클릭 시 Q3로 이동
+let currentScoreQ3 = 0;
+handleSpanClick('.Q3', '.Q4');  // Q3 클릭 시 Q4로 이동
+let currentScoreQ4 = 0;
+handleSpanClick('.Q4', '.Q5');  // Q4 클릭 시 Q5로 이동
+let currentScoreQ5 = 0;
+
+// Q5에서 점수 갱신
+function updateScoreForQ5() {
+    const allSpans = document.querySelectorAll('.Q5 .clickable');  // Q5 내 모든 span 요소
+    const clickedSpans = document.querySelectorAll('.Q5 .checkmark');  // 클릭된 span 요소
+
+    const currentScore = clickedSpans.length;  // 현재 클릭된 체크마크 개수 (현재 점수)
+    const maxScore = allSpans.length;  // 전체 <span> 요소 개수 (최대 점수)
+
+    // 점수 업데이트
+    document.getElementById('score').textContent = `${currentScore} / ${maxScore}`;
+
+    // Q5에서 점수를 모두 달성했으면 ansback 나타내기
+    if (currentScore === maxScore) {
+        setTimeout(() => {
+            document.getElementById('score').style.display = 'none';  // 점수 숨기기
+            document.querySelector('.ansback').style.display = 'block';  // ansback 표시
+        }, 500); // 0.5초 뒤에 실행
+    }
+}
+
+// Q5에서 span 클릭 시 체크 표시 추가하고 상태를 확인
+document.querySelectorAll('.Q5 .clickable').forEach(item => {
+    item.addEventListener('click', function() {
+        // 이미 체크마크가 추가된 경우 추가하지 않음
+        if (!this.querySelector('.checkmark')) {
+            const checkmark = document.createElement('span');
+            checkmark.classList.add('checkmark');
+            checkmark.textContent = '✔';
+            this.appendChild(checkmark);
+        }
+
+        // 점수 갱신
+        updateScoreForQ5();  // 점수 갱신
+    });
+});
+
+
+document.getElementById('ans').addEventListener('click', function() {
+    document.querySelector('.Q5').style.display = 'none';
+    document.querySelector('#score').style.display = 'none';
+    document.querySelector('.A').style.display = 'block';
+    document.querySelector('.Q3').style.display = 'none';
+    document.querySelector('.Q2').style.display = 'none';
+    document.querySelector('.Q4').style.display = 'none';
+    
+    // 스코어가 정해져 있는 경우 점수 업데이트를 여기서 처리
+    updateScore();
+});
+
+// 상태 변수를 추가하여 클릭 횟수를 추적
+let isTextChanged = false;
+
+document.getElementById('ans').addEventListener('click', function() {
+    if (!isTextChanged) {
+        // 첫 번째 클릭: 텍스트 변경
+        document.getElementById('ans').textContent = '▶ 축하합니다!';
+        isTextChanged = true;  // 상태 변수 갱신
+    } else {
+        const name = new URLSearchParams(window.location.search).get('name'); // 이름값 가져오기
+        window.location.href = `마무리.html?name=${name}`;  // 문제3 페이지로 이동
+    }
+});
+        </script>
+</body>
+</html>
